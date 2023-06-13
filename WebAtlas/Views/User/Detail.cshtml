@@ -1,0 +1,42 @@
+﻿﻿@using WebAtlas.ViewModels
+@model UserDetailViewModel
+
+<div class="blog-single gray-bg">
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-lg-8 m-15px-tb">
+                <article class="article">
+                    <div class="article-img">
+                        <img src="@Model.ProfileImageUrl" width="1000" height="500" title="" alt="">
+                    </div>
+                    <div class="article-title">
+                        <h2>@Model.NameLita</h2>
+                        <h6><a href=@Model.AddressLink target="_blank">@Model.City @Model.Street @Model.HouseNumber</a></h6>
+                        <div class="media">
+                            <div class="avatar">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" title="" alt="">
+                            </div>
+                            <div class="media-body">
+                                <label>@Model.ContactEmail</label>
+                                <span>@Model.ContactPhone</span>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Eleventh navbar example">
+                        <div class="collapse navbar-collapse" id="navbarsExample09">
+                            <a type="button" asp-controller="News" asp-action="Index" asp-route-lito="@Model.NameLita" class="btn btn-sm btn-outline-secondary">Новости</a>
+                            <a type="button" asp-controller="Event" asp-action="Index" asp-route-lito="@Model.NameLita" class="btn btn-sm btn-outline-secondary">Мероприятия</a>
+                            <a type="button" asp-controller="Material" asp-action="Index" asp-route-lito="@Model.NameLita" class="btn btn-sm btn-outline-secondary">Материалы</a>
+                       </div>
+                    </nav>
+
+                    <div class="article-content">
+                        <p>@Model.Description</p>
+@*                        <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/38/volgograd/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Волгоград</a><a href="https://yandex.ru/maps/38/volgograd/house/ulitsa_kuznetsova_5/YE0YcwNnSkUFQFpifXt0dH5gbA==/?ll=44.559287%2C48.759938&utm_medium=mapframe&utm_source=maps&z=14.17" style="color:#eee;font-size:12px;position:absolute;top:14px;">Улица Кузнецова, 5 — Яндекс Карты</a><iframe src="https://yandex.ru/map-widget/v1/?ll=44.559287%2C48.759938&mode=whatshere&whatshere%5Bpoint%5D=44.547210%2C48.755180&whatshere%5Bzoom%5D=17&z=14.17" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+*@
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>

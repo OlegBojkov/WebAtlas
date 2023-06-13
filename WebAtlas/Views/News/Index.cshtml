@@ -1,0 +1,86 @@
+﻿@using WebAtlas.ViewModels;
+@using WebAtlas.Data.Enum
+@model IndexNewsViewModel
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Eleventh navbar example">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarsExample09">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Категория</a>
+                            <ul class="dropdown-menu">
+                                <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-category="-1">Все</a></li>
+                                @foreach (var category in Html.GetEnumSelectList<Category>())
+                                {
+                                    <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-category="@category.Value">@category.Text</a></li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Город</a>
+                            <ul class="dropdown-menu">
+                                <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-city="Все">Все</a></li>
+                                @foreach (var cities in Model.Cities)
+                                {
+                                    <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-city="@cities">@cities</a></li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">ЛитО</a>
+                            <ul class="dropdown-menu">
+                                <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-lito="Все">Все</a></li>
+                                @foreach (var name in Model.NameLita)
+                                {
+                                    <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-lito="@name">@name</a></li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Сортировка</a>
+                            <ul class="dropdown-menu">
+                                <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-sort="Все">Все</a></li>
+                                <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-sort="DateSort">По дате</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form asp-controller="News" asp-action="Index">
+                        <p>
+                            Найти: <input type="text" name="SearchString" />
+                            <input type="submit" value="Поиск" />
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (var item in Model.News)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="card-img-top" src="@item.Image" width="225" height="225" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">@item.Title</p>
+                            <p class="card-text">@item.Description</p>
+                            @*<p class="card-text">@item.AppUser.NameLita</p>*@
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a type="btn btn-success" asp-controller="News" asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Посмотреть</a>
+                                </div>
+                                <small class="text-body-secondary">@item.Category</small>
+                                <small class="text-body-secondary">@item.DateCreated.ToString("dd/MM/yy")</small>
+                            </div>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                            {
+                                <a type="button" asp-controller="News" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                                <a type="button" asp-controller="News" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Удалить</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

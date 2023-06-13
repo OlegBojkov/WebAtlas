@@ -1,0 +1,105 @@
+﻿@using WebAtlas.ViewModels;
+@using WebAtlas.Data.Enum
+@model IndexMaterialViewModel
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Eleventh navbar example">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarsExample09">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Сортировка</a>
+                            <ul class="dropdown-menu">
+                                <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-sort="Все">Все</a></li>
+                                <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-sort="DateSort">По дате</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">ЛитО</a>
+                            <ul class="dropdown-menu">
+                                <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-lito="Все">Все</a></li>
+                                @foreach (var name in Model.NameLita)
+                                {
+                                    <li><a type="button" class="dropdown-item" asp-action="Index" asp-route-lito="@name">@name</a></li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                    <form asp-controller="Material" asp-action="Index">
+                        <p>
+                            Найти: <input type="text" name="SearchString" />
+                            <input type="submit" value="Поиск" />
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <ul class="list-group mt-5 text-white">
+            @foreach (var item in Model.Materials)
+            {
+                <li class="list-group-item d-flex justify-content-between align-content-center">
+
+                    <div class="d-flex flex-row">
+
+                        <div class="ml-2">
+                            <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
+                            <h5 class="mb-0">@item.Title</h5>
+                            <div class="about">
+                                <span>@item.FileLength Kb</span>
+                                <span>@item.DateCreated.ToString("dd/MM/yy")</span>
+
+                            </div>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                            {
+                                <a type="button" asp-controller="Material" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                                <a type="button" asp-controller="Material" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Удалить</a>
+                            }
+                        </div>
+                    </div>
+                    <div>
+                        <a type="btn btn-success" asp-controller="Material" asp-action="Details" asp-route-id="@item.Id" class="btn d-block w-100 d-sm-inline-block btn-light">Посмотреть</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<style>
+
+    .list-group {
+        width: 400px !important;
+    }
+
+    .list-group-item {
+        margin-top: 10px;
+        border-radius: none;
+        background: #76b0e5;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+
+        .list-group-item:hover {
+            transform: scaleX(1.1);
+        }
+
+
+
+    .check {
+        opacity: 0;
+        transition: all 0.6s ease-in-out;
+    }
+
+    .list-group-item:hover .check {
+        opacity: 1;
+    }
+
+    .about span {
+        font-size: 12px;
+        margin-right: 10px;
+    }
+
+</style>

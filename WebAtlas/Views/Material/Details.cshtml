@@ -1,0 +1,22 @@
+﻿@model Material
+
+<div class="blog-single gray-bg">
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-lg-8 m-15px-tb">
+                <article class="article">
+                    <div class="article-title">
+                        <h6><a asp-controller="User" asp-action="Detail" asp-route-id="@Model.AppUser.Id">@Model.AppUser.NameLita</a></h6>
+                        <h2>@Model.Title</h2>
+                        <h4>@Model.Description</h4>
+                    </div>
+                    <div class="article-content">
+                        <h4>@Model.Content</h4>
+                        <p>@Model.DateCreated.ToString("dd/MM/yy") || @Model.FileLength kb</p>
+                        <a class="btn btn-primary w-100 py-2" href="@Model.FilePath" download="@Model.FileName">Скачать</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>

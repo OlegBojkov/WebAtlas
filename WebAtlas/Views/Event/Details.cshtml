@@ -1,0 +1,42 @@
+﻿
+@model Event
+
+
+<div class="blog-single gray-bg">
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-lg-8 m-15px-tb">
+                <article class="article">
+                    <div class="article-img">
+                        <img src="@Model.Image" width="1000" height="500" title="" alt="">
+                    </div>
+                    <div class="article-title">
+                        <h2>@Model.Title</h2>
+                        <h4>@Model.Description</h4>
+                        <div class="media">
+                            <div class="avatar">
+                                <img src="@Model.AppUser.ProfileImageUrl" title="" alt="">
+                            </div>
+                            <div class="media-body">
+                                <label><a asp-controller="User" asp-action="Detail" asp-route-id="@Model.AppUser.Id">@Model.AppUser.NameLita</a></label>
+                                <span>@Model.Address.City || @Model.DateEvent.ToString("dd/MM/yy HH:mm")</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p>@Model.Content</p>
+                    </div>
+                    <!-- VK https://vk.com/dev/Comments -->
+                    <script type="text/javascript" src="https://vk.com/js/api/openapi.js?169"></script>
+                    <script type="text/javascript">
+                        VK.init({ apiId: 51662396, onlyWidgets: true });
+                    </script>
+                    <div id="vk_comments"></div>
+                    <script type="text/javascript">
+                        VK.Widgets.Comments("vk_comments", { limit: 10, attach: "*" });
+                    </script>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>

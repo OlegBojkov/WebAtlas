@@ -1,0 +1,43 @@
+﻿@using WebAtlas.Data.Enum;
+@using WebAtlas.ViewModels;
+@model CreateNewsViewModel
+
+
+<form method="post" asp-action="Create" enctype="multipart/form-data">
+    <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId" />
+
+    <div class="form-group">
+        <label asp-for="Title">Название</label>
+        <input asp-for="Title" class="form-control" placeholder="Введите название">
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Описание</label>
+        <input asp-for="Description" class="form-control" placeholder="Введите описание">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Content">Контент</label>
+        <input asp-for="Content" class="form-control" placeholder="Введите контент">
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Category">Категория</label>
+        <select asp-for="Category" asp-items="@Html.GetEnumSelectList<Category>()" class="form-control form-control-lg">
+            <option>--Выбирите категорию--</option>
+        </select>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">Картинка</label>
+        <input asp-for="Image" type="file" class="form-control" placeholder="Enter Image">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <br>
+    <div class="form-group">
+        <input class="btn btn-outline-success float right" type="submit" value="Подтвердить" />
+        <a class="btn btn-outline-secondary" asp-controller="Dashboard" asp-action="Index">Назад</a>
+    </div>
+</form>
+
+

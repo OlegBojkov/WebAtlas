@@ -1,0 +1,90 @@
+﻿@using WebAtlas.ViewModels
+@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Sign up";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"] </span>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <p>
+                    <h4>Зарегистрируйте новый аккаунт</h4>
+                </p>
+                <form asp-action="Register">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="EmailAddress" class="control-label">Почта</label>
+                        <input asp-for="EmailAddress" class="form-control" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label">Пароль</label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label">Повторите пароль</label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NameLita">Название ЛитО</label>
+                        <input asp-for="NameLita" class="form-control" placeholder="Введите название ЛитО">
+                        <span asp-validation-for="NameLita" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description">Описание ЛитО</label>
+                        <input asp-for="Description" class="form-control" placeholder="Введите описание">
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address.City">Город</label>
+                        <input asp-for="Address.City" class="form-control" placeholder="Введите город">
+                        <span asp-validation-for="Address.City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address.Street">Улица</label>
+                        <input asp-for="Address.Street" class="form-control" placeholder="Введите улицу">
+                        <span asp-validation-for="Address.Street" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address.HouseNumber">Номер дома</label>
+                        <input asp-for="Address.HouseNumber" class="form-control" placeholder="Введите номер дома">
+                        <span asp-validation-for="Address.HouseNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AddressLink">Ссылка на адрес</label>
+                        <input asp-for="AddressLink" class="form-control" placeholder="Ссылка на яндекс карты">
+                        <span asp-validation-for="AddressLink" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ContactEmail">Контактная почта</label>
+                        <input asp-for="ContactEmail" class="form-control" placeholder="Введите контактную почту">
+                        <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ContactPhone">Контактный телефон</label>
+                        <input asp-for="ContactPhone" class="form-control" placeholder="Введите контактный телефон">
+                        <span asp-validation-for="ContactPhone" class="text-danger"></span>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input class="btn btn-outline-success float-right" type="submit" value="Зарегистрироваться" />
+                        <a class="btn btn-outline-secondary" asp-controller="News" asp-action="Index">Назад</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
